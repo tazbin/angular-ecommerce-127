@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const productRoute = require('./routes/product.route')
+const orderRoute = require('./routes/order.route')
 
 const app = express()
 const port = 3000
@@ -20,6 +21,7 @@ mongoose.connection.on('error', function(err) {
 
 // routes
 app.use('/products', productRoute)
+app.use('/orders', orderRoute)
 
 app.get('/', (req, res) => {
     res.status(200).json({

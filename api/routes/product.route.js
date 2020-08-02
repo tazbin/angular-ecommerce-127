@@ -39,6 +39,27 @@ router.get('/:id', (req, res, next) => {
         })
 })
 
+// adding new product
+router.post('/', (req, res, next) => {
+    newProduct = new productModel({
+            name: req.body.name,
+            description: req.body.description,
+            images: req.body.images,
+            price: req.body.price,
+            stock: req.body.stock
+        })
+        .save()
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: 'Internal server error',
+                err: err
+            })
+        })
+})
+
 // change product stock
 router.put('/:id/:changeStock', (req, res, next) => {
     const productId = req.params.id
