@@ -44,6 +44,7 @@ router.post('/', (req, res, next) => {
     newProduct = new productModel({
             name: req.body.name,
             description: req.body.description,
+            category: req.body.category,
             images: req.body.images,
             price: req.body.price,
             stock: req.body.stock
