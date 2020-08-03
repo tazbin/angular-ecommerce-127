@@ -1,11 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors');
 const mongoose = require('mongoose')
 const productRoute = require('./routes/product.route')
 const orderRoute = require('./routes/order.route')
 
 const app = express()
 const port = 3000
+app.use(cors())
 app.use(bodyParser.json())
 
 // databse connection
