@@ -65,7 +65,6 @@ router.post('/', (req, res, next) => {
 router.put('/:id/:changeStock', (req, res, next) => {
     const productId = req.params.id
     const changeStock = req.params.changeStock
-    console.log(changeStock)
     productModel.findOne({ _id: productId })
         .exec()
         .then(result => {

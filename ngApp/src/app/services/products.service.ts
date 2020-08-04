@@ -17,4 +17,12 @@ export class ProductsService {
    getAllProducts(){
      return this._http.get('http://127.0.0.1:3000/products/');
    }
+
+   getSingleProducts(id: string){
+    return this._http.get('http://127.0.0.1:3000/products/'+id);
+   }
+
+   decreaseStock(id: string){
+    return this._http.put('http://127.0.0.1:3000/products/'+id+'/1','');
+   }
 }
