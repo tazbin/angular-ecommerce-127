@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.getAllProducts();
   }
 
+  // getting all products
   getAllProducts(){
     this._productService.getAllProducts()
     .subscribe(
@@ -26,6 +27,11 @@ export class HomeComponent implements OnInit {
         this.allProducts = res;
       }
     )
+  }
+
+  // adding product to cart
+  addToCart(id: string){
+    console.log(id);
   }
 
 }
