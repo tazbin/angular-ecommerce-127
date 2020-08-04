@@ -87,12 +87,12 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text">
-                                    {{ product.description }}...
+                                    {{ product.description.substring(0, 25) }}...
                                 </p>
                                 <p class="price">
                                     {{ product.price | currency:'USD' }}
                                 </p>
-                                <button class="btn btn-sm btn-outline-primary d-block mx-auto" (click)="addToCart(product._id)">Add to cart</button>
+                                <button class="btn btn-sm btn-outline-primary d-block mx-auto">Add to cart</button>
                             </div>
                         </div>
                     </div>

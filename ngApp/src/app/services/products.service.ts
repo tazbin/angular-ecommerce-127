@@ -25,4 +25,8 @@ export class ProductsService {
    decreaseStock(id: string){
     return this._http.put('http://127.0.0.1:3000/products/'+id+'/1','');
    }
+
+   restoreStock(id: string, quantity: number){
+    return this._http.put('http://127.0.0.1:3000/products/'+id+'/'+quantity,'');
+   }
 }
