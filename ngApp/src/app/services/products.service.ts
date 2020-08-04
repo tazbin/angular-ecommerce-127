@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { productModel } from '../models/product.model';
+import { ProductModelServer } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  server_url = environment.api_link;
+  private server_url = environment.SERVER_URL;
 
   constructor( 
     private _http: HttpClient
    ) { }
 
    getAllProducts(){
-     return this._http.get('http://127.0.0.1:3000/products/');
+     return this._http.get(this.server_url+'/products');
    }
 
    getSingleProducts(id: string){

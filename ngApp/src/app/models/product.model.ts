@@ -1,4 +1,4 @@
-export interface productModel{
+export interface ProductModelServer{
     id: string;
     name: string;
     description: string,
@@ -6,4 +6,8 @@ export interface productModel{
     images: string,
     price: number,
     stock: number
+}
+
+export interface ServerResponse{
+    products: ProductModelServer[]
 }
