@@ -82,7 +82,7 @@
                     <div class="col-md-3" *ngFor="let product of allProducts">
                         <div class="card">
                             <img [src]="product.images" class="card-img-top">
-                            <div class="card-header" (click)="selectProduct(product._id)" style="cursor: pointer">
+                            <div class="card-header" style="cursor: pointer">
                                 {{ product.name | titlecase }}
                             </div>
                             <div class="card-body">
@@ -92,8 +92,10 @@
                                 <p class="price">
                                     {{ product.price | currency:'USD' }}
                                 </p>
-                                <button class="btn btn-sm btn-outline-primary d-block mx-auto" [class.disabled]="product.stock < 1" [class.btn-outline-danger]="product.stock < 1">
-                                {{ product.stock < 1 ? 'NO STROCK': 'Add to cart' }}
+                                <button class="btn btn-outline-primary d-block mx-auto" (click)="addToCart(product._id)" [class.disabled]="product.stock < 1" [class.btn-outline-danger]="product.stock < 1">
+                                 {{
+                                    product.stock < 1 ? 'Out of Stock': 'Add to Stock'
+                                 }}
                                 </button>
                             </div>
                         </div>

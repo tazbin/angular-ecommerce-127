@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartModelServer } from '../models/cart.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  myCart: CartModelServer;
+
+  constructor(
+    private _cartService: CartService
+  ) { }
 
   ngOnInit(): void {
+    this._cartService.cartData$
+    .subscribe( res => {
+      this.myCart = res;
+    } );
+  }
+
+  removeFromCart(index: number){
+    this._cartService.removeFromCart(index);
   }
 
 }

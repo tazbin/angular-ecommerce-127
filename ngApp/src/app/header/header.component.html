@@ -9,7 +9,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a routerLink='' class="logo">
                             <img src="assets/img/logo.png" alt="">
                         </a>
                     </div>
@@ -50,35 +50,33 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <div class="qty">
+                                    {{ myCart.items[0].product == undefined ? 0 : myCart.items.length }}
+                                </div>
                             </a>
                             <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
+                                <div class="cart-list" *ngIf="myCart.items[0].product == undefined ? false: true">
+
+                                    <div class="product-widget" *ngFor="let p of myCart.items; index as i">
                                         <div class="product-img">
-                                            <img src="assets/img/product01.png" alt="">
+                                            <img [src]="p.product.images" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                            <h3 class="product-name"><a href="#">
+                                                {{ p.product.name }}
+                                            </a></h3>
+                                            <h4 class="product-price"><span class="qty">
+                                                {{ p.quantity }} x
+                                            </span> {{ p.product.price | currency:'USD' }}</h4>
                                         </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                        <button class="delete" (click)="removeFromCart(i)"><i class="fa fa-close"></i></button>
                                     </div>
 
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="assets/img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
                                 </div>
                                 <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <small>
+                                    {{ myCart.items[0].product == undefined ? 0 : myCart.items.length }} Item(s) selected</small>
+                                    <h5>SUBTOTAL: {{ myCart.total | currency:'USD' }}</h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a routerLink="/cart">View Cart</a>

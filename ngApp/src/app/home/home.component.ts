@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products.service';
 import { Router } from '@angular/router';
-import { ProductModelServer } from '../models/product.model';
+import { ProductService } from '../services/product.service';
+import { ProductModel } from '../models/product.model';
+import { CartService } from '../services/cart.service';
+import { CartModelServer } from '../models/cart.model';
 
 @Component({
   selector: 'app-home',
@@ -10,29 +12,31 @@ import { ProductModelServer } from '../models/product.model';
 })
 export class HomeComponent implements OnInit {
 
-  allProducts: ProductModelServer[] = [];
+  allProducts: ProductModel[] = [];
+  myCart: any;
 
   constructor(
-    private _productService: ProductsService,
-    private _router: Router
+    private _productService: ProductService,
+    private _cartService: CartService
   ) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+    this._cartService.cartData$
+    .subscribe(res => this.myCart = res);
   }
 
-  // getting all products
+  // getting all product list from server
   getAllProducts(){
     this._productService.getAllProducts()
-    .subscribe(
-      (res: ProductModelServer[]) => this.allProducts = res
-    )
+    .subscribe( (res: ProductModel[]) => {
+      this.allProducts = res;
+    })
   }
 
-  // select a perticular products
-  selectProduct(id: string){
-    // this._router.navigate(['/product', id]);
-    this._router.navigate(['/product/'+id]);
+  // adding product to cart
+  addToCart(id: string){
+    this._cartService.addToCart(id);
   }
 
 
